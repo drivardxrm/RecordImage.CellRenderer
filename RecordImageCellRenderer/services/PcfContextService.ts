@@ -8,30 +8,33 @@ import { IInputs } from '../generated/ManifestTypes'
 
 export interface IPcfContextServiceProps{
   context: ComponentFramework.Context<IInputs>;
-  instanceid: number;
+  entityname : string;
+  instanceid: string;
 }
 
 
 export class PcfContextService {
-  instanceid:number;
+  instanceid:string;
   context: ComponentFramework.Context<IInputs>;
   entityname : string;
 
   constructor (props?:IPcfContextServiceProps) {
     if (props) {
       this.instanceid = props.instanceid
-      this.entityname = (props.context as any).accessibility._customControlProperties.descriptor.Parameters.TargetEntityType // Probably unsuported
+      this.entityname = props.entityname
       this.context = props.context
     }
   }
 
   async getEntityMetadata (entityname:string) : Promise<ComponentFramework.PropertyHelper.EntityMetadata> {
+    console.log('getEntityMetadata-' + entityname)
     return this.context.utils.getEntityMetadata(entityname)
   }
 
   async getRecordImage (entityType:string, id:string, primaryimage:string) : Promise<string> {
-
+    console.log('getRecordImage-' + entityType + '-' + id) 
     let record = await this.context.webAPI.retrieveRecord(entityType,id,`?$select=${primaryimage}`)
+
     return  record?.[primaryimage]
             ? `data:image/jpeg;base64,${record?.[primaryimage]}`
             : ''

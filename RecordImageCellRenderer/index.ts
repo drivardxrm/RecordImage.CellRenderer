@@ -5,8 +5,15 @@ import * as React from "react";
 import { cellEditorOverrides } from "./customizers/CellEditorOverrides";
 import { generateCellRendererOverrides } from "./customizers/CellRendererOverrides";
 import { IPcfContextServiceProps, PcfContextService } from "./services/PcfContextService";
+import { QueryCache, QueryClient } from "@tanstack/react-query";
 
 export class RecordImageCellRenderer implements ComponentFramework.ReactControl<IInputs, IOutputs> {
+    
+    
+    
+    
+    
+    
     /**
      * Empty constructor.
      */
@@ -26,18 +33,26 @@ export class RecordImageCellRenderer implements ComponentFramework.ReactControl<
     ): void {
         const eventName = context.parameters.EventName.raw;
        // const test = (context as any).appsettings.getAppSetting()
-        
+        console.log('init-' + eventName)
         if (eventName) {
+            
+            const contexttype = (context as any).accessibility._customControlProperties.contextToken.contextTokenType
+            // 5 = Subgrid
+            // 2 = Main entity view
 
+            const entityname = contexttype == 2 ? 
+                (context as any).accessibility._customControlProperties.contextToken.entityTypeName :
+                (context as any).accessibility._customControlProperties.descriptor.Parameters.TargetEntityType 
+                          
+                        
             const pcfContextServiceProps:IPcfContextServiceProps = {
                 context : context,
-                instanceid: Math.random()
+                entityname: entityname,
+                instanceid: eventName
             } 
 
-            const pcfContextService = new PcfContextService(pcfContextServiceProps);
-
             const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
-                generateCellRendererOverrides(pcfContextService)
+                generateCellRendererOverrides(pcfContextServiceProps)
             };
             (context as any).factory.fireEvent(eventName, paOneGridCustomizer);
         }
