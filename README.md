@@ -1,6 +1,6 @@
 # Record Image Cell Renderer for PowerApps Grid
 
-This Generic Cell Renderer is a specialized PCF Control that works in conjunction with the PowerApps Grid Control.
+This generic Cell Renderer is a specialized PCF Control that works in conjunction with the PowerApps Grid Control.
 It renders each record's primary name with its primary image, improving visual clarity and user experience.
 
 Example with main table views : 
