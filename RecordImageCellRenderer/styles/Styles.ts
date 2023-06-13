@@ -31,6 +31,7 @@ export const useStyles = makeStyles({
     //   textDecorationLine: 'none'
     // }
   },
+
   stackHorizontal: {  // overrides for horizontal stack
     display: 'flex',
     flexWrap: 'nowrap',
@@ -39,8 +40,9 @@ export const useStyles = makeStyles({
     boxSizing: 'border-box',
     flexDirection: 'row',
     marginLeft: '5px',
+    marginTop: '5px',
     '> :not(:last-child)': {
-      marginRight: '10px',
+      marginRight: '5px',
     }
   },
 

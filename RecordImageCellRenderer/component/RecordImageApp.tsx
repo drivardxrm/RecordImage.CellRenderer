@@ -16,10 +16,12 @@ const RecordImageApp = ({recordid,name}:iRecordImageProps) => {
 
     const styles = useStyles();
     return(
+
       <div className={styles.stackHorizontal}>
-          <RecordImage recordid={recordid!} name={name} />
-          <RecordLink recordid={recordid!} name={name} />
+        <RecordImage recordid={recordid!} name={name} />
+        <RecordLink recordid={recordid!} name={name} />
       </div>
+
     )
 }
 
