@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="DR" constructor="RecordImageCellRenderer" version="0.0.24" display-name-key="RecordImageCellRenderer" description-key="RecordImageCellRenderer description" control-type="virtual" >
+  <control namespace="DR" constructor="RecordImageCellRenderer" version="0.0.25" display-name-key="RecordImageCellRenderer" description-key="RecordImageCellRenderer description" control-type="virtual" >
 
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS

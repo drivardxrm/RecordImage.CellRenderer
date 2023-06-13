@@ -26,14 +26,15 @@ export const generateCellRendererOverrides =
     ["Text"]: (props: CellRendererProps, rendererParams: GetRendererParams) => {             
         const {columnIndex, colDefs, rowData } = rendererParams;         
         const columnName = colDefs[columnIndex].name;
+        
+        // Renders only for the PrimaryName of the entity
         if(columnName !== pcfContextServiceProps.primarynamefield){
             return null;
         } 
 
         const pcfContextService = new PcfContextService(pcfContextServiceProps);
-
-
         const recordid = rowData?.[RECID]
+
         return (
             
             <QueryClientProvider client={queryClient}>

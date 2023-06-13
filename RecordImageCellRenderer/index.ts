@@ -26,19 +26,21 @@ export class RecordImageCellRenderer implements ComponentFramework.ReactControl<
         state: ComponentFramework.Dictionary
     ): void {
         const eventName = context.parameters.EventName.raw;
-       // const test = (context as any).appsettings.getAppSetting()
-        console.log('init-' + eventName)
+
         if (eventName) {
             
             const contexttype = (context as any).accessibility._customControlProperties.contextToken.contextTokenType
             // 5 = Subgrid
             // 2 = Main entity view
 
+
+            // Depending on contexttype, get the entityname
             const entityname = contexttype == 2 ? 
                 (context as any).accessibility._customControlProperties.contextToken.entityTypeName :
                 (context as any).accessibility._customControlProperties.descriptor.Parameters.TargetEntityType 
                           
             
+            // Metadata to get PrimaryName and PrimaryImage attribute name
             context.utils.getEntityMetadata(entityname).then((metadata)=>{
                 const primarynamefield = metadata.PrimaryNameAttribute
                 const primaryimagefield = metadata.PrimaryImageAttribute         

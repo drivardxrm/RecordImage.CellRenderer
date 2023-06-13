@@ -12,7 +12,7 @@ export interface iRecordImageProps{
   columnname? : string
 }
 
-const RecordImageApp = ({recordid,name}:iRecordImageProps) => {
+const RecordImageApp = ({recordid,name}:iRecordImageProps):JSX.Element => {
 
     const styles = useStyles();
     return(
