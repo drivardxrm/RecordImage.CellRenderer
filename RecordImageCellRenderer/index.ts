@@ -2,18 +2,12 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes";
 import { PAOneGridCustomizer } from "./types";
 
 import * as React from "react";
-import { cellEditorOverrides } from "./customizers/CellEditorOverrides";
 import { generateCellRendererOverrides } from "./customizers/CellRendererOverrides";
-import { IPcfContextServiceProps, PcfContextService } from "./services/PcfContextService";
-import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { IPcfContextServiceProps } from "./services/PcfContextService";
 
 export class RecordImageCellRenderer implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     
-    
-    
-    
-    
-    
+
     /**
      * Empty constructor.
      */
@@ -44,17 +38,25 @@ export class RecordImageCellRenderer implements ComponentFramework.ReactControl<
                 (context as any).accessibility._customControlProperties.contextToken.entityTypeName :
                 (context as any).accessibility._customControlProperties.descriptor.Parameters.TargetEntityType 
                           
-                        
-            const pcfContextServiceProps:IPcfContextServiceProps = {
-                context : context,
-                entityname: entityname,
-                instanceid: eventName
-            } 
-
-            const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
-                generateCellRendererOverrides(pcfContextServiceProps)
-            };
-            (context as any).factory.fireEvent(eventName, paOneGridCustomizer);
+            
+            context.utils.getEntityMetadata(entityname).then((metadata)=>{
+                const primarynamefield = metadata.PrimaryNameAttribute
+                const primaryimagefield = metadata.PrimaryImageAttribute         
+            
+                const pcfContextServiceProps:IPcfContextServiceProps = {
+                    context : context,
+                    entityname: entityname,
+                    instanceid: eventName,
+                    primarynamefield: primarynamefield,
+                    primaryimagefield: primaryimagefield
+                } 
+    
+                const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
+                    generateCellRendererOverrides(pcfContextServiceProps)
+                };
+                (context as any).factory.fireEvent(eventName, paOneGridCustomizer);
+            
+            })    
         }
     }
 

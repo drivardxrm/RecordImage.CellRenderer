@@ -1,29 +1,25 @@
 import * as React from 'react';
 import { Image } from "@fluentui/react-components"
 import { useRecordImage } from "../hooks/useRecordImage"
-import { usePcfContext } from "../services/PcfContext"
 import { useStyles } from '../styles/Styles';
+import { iRecordImageProps } from './RecordImageApp';
 
 
-export interface iRecordImageProps{
-  id: string;
-  name: string;
-}
 
-const RecordImage = ({id,name}:iRecordImageProps) => {
 
-    const pcfcontext = usePcfContext()
+const RecordImage = ({recordid,name}:iRecordImageProps) => {
+
     const styles = useStyles();
-    const {imagesrc, isError,isLoading} = useRecordImage(pcfcontext.entityname, id)
-    if (isLoading || isError || !imagesrc || imagesrc === '') {
-      return <></>
+    const {imagesrc, isError,isLoading} = useRecordImage(recordid)
+    if (isLoading || isError) {
+      return null
     } 
     else {
       return(
         <Image
           alt={name + ' image'}
           className={styles.image}
-          key={'recordimage-' + id}
+          key={'recordimage-' + recordid}
           shape={"rounded"}
           src={imagesrc}
           height={24}

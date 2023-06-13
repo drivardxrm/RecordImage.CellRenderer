@@ -40,7 +40,7 @@ export const useStyles = makeStyles({
     flexDirection: 'row',
     marginLeft: '5px',
     '> :not(:last-child)': {
-      marginRight: '12px',
+      marginRight: '10px',
     }
   },
 
