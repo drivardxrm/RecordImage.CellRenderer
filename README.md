@@ -1,7 +1,7 @@
 # Record Image Cell Renderer for PowerApps Grid
 
 This Generic Cell Renderer is a special PCF Control that works in conjunction with the PowerApps Grid Control.
-It will show the primary image of each record on the primary name column of the grid
+It will render each records primary name along with its primary image if defined.
 
 Example with main table views : 
 
@@ -13,7 +13,7 @@ Example with a subgrid on a form :
 
 # Configuration
 
-Add 'driv_DR.RecordImageCellRenderer' in the Customizer Control parameter of the PowerApps Grid Control
+Simply add 'driv_DR.RecordImageCellRenderer' in the Customizer Control parameter of the PowerApps Grid Control
 
 ![image](https://github.com/drivardxrm/RecordImage.CellRenderer/assets/38399134/3d45fb0c-7b1f-4a54-a2b0-35ac6df434a7)
 
