@@ -7,10 +7,10 @@ import { iRecordImageProps } from './RecordImageApp';
 
 
 
-const RecordImage = ({recordid,name}:iRecordImageProps):JSX.Element => {
+const RecordImage = ({entityname,recordid,name}:iRecordImageProps):JSX.Element => {
 
     const styles = useStyles();
-    const {imagesrc, isError,isLoading} = useRecordImage(recordid)
+    const {imagesrc, isError,isLoading} = useRecordImage(entityname,recordid)
     if (isLoading || isError) {
       return <></>
     } 

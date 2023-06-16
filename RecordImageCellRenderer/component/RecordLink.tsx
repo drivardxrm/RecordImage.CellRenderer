@@ -4,7 +4,7 @@ import { usePcfContext } from "../services/PcfContext"
 import { useStyles } from '../styles/Styles';
 import { iRecordImageProps } from './RecordImageApp';
 
-const RecordLink = ({recordid,name}:iRecordImageProps): JSX.Element => {
+const RecordLink = ({entityname,recordid,name}:iRecordImageProps): JSX.Element => {
 
     const pcfcontext = usePcfContext()
     const styles = useStyles();
@@ -12,7 +12,7 @@ const RecordLink = ({recordid,name}:iRecordImageProps): JSX.Element => {
       <Link 
         key={'recordlink-' + recordid}
         className={styles.link}
-        onClick={() => {pcfcontext.openRecord(recordid)}}
+        onClick={() => {pcfcontext.openRecord(entityname,recordid)}}
       >
         {name}
       </Link>
