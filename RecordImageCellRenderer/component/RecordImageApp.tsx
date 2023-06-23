@@ -23,11 +23,17 @@ const RecordImageApp = ({entityname,recordid,name}:iRecordImageProps):JSX.Elemen
     }
     return(
 
-      <div className={styles.stackHorizontal}>
+      <div className={styles.stack}>
         {!!primaryimage &&   // Dont render the image part if not defined on the entity
-          <RecordImage entityname={entityname} recordid={recordid!} name={name} />
-        }  
-        <RecordLink entityname={entityname} recordid={recordid!} name={name} />
+          <div className={styles.stackitem}>
+            <RecordImage entityname={entityname} recordid={recordid!} name={name} />
+          </div>
+          
+        }
+        <div className={styles.stackitem}>
+          <RecordLink entityname={entityname} recordid={recordid!} name={name} />
+        </div>  
+        
       </div>
 
     )

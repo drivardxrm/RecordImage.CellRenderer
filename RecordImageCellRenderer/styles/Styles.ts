@@ -3,47 +3,64 @@ import { NONAME } from 'dns';
 
 export const useStyles = makeStyles({
   image: {  
-    // display: 'flex',
-    // flexWrap: 'wrap',
-    // width: 'fit-content',
-    // height: 'fit-content',
-    // boxSizing: 'border-box',
-    // verticalAlign: 'middle',
+    position : 'relative',
+    height: '24px',
+    minWidth : '24px',
+    display : 'flex',
+    alignItems: 'center'
+    
   },
   link: {  
     fontSize: '14px',
     fontWeight: 'normal',
     color: 'rgb(0, 120, 212)',
     textDecorationLine: 'none',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
     textOverflow: 'ellipsis',
+    lineHeight: '22px',
     boxSizing: 'border-box',
     display: 'block',
     maxWidth: '100%',
     verticalAlign: 'middle',
     width: 'fit-content',
   
-  
-    
-    // ':hover': {
-    //   textDecorationLine: 'none'
-    // },
-    // ':active': {
-    //   textDecorationLine: 'none'
-    // }
   },
 
-  stackHorizontal: {  // overrides for horizontal stack
+  stack: {  
     display: 'flex',
-    flexWrap: 'nowrap',
-    width: 'fit-content',
-    height: 'fit-content',
-    boxSizing: 'border-box',
     flexDirection: 'row',
-    marginLeft: '5px',
-    marginTop: '5px',
+    flexWrap: 'nowrap',
+    width: 'auto',
+    height: '100%',
+    boxSizing: 'border-box',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '20px',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
+    textOverflow: 'ellipsis',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+    
+
     '> :not(:last-child)': {
-      marginRight: '5px',
+       marginRight: '5px',
     }
+  },
+
+  stackitem: {  
+    flexBasis: 'auto',
+    width: 'auto',
+    height: 'auto',
+    flexShrink: 1
+    // marginLeft: '5px',
+    // marginTop: '5px',
+    // '> :not(:last-child)': {
+    //   marginRight: '5px',
+    // }
   },
 
 
