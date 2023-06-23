@@ -1,18 +1,25 @@
 # Record Image Cell Renderer for PowerApps Grid
 ![GitHub all releases](https://img.shields.io/github/downloads/drivardxrm/RecordImage.CellRenderer/total)
 
-This generic Cell Renderer is a specialized PCF Control that works in conjunction with the PowerApps Grid Control.
-It renders each record's primary name with its primary image, improving visual clarity and user experience.
+This generic Cell Renderer is a specialized PCF Control that works in conjunction with the **PowerApps Grid Control**.
+It renders each record's **primary name** column and **other lookup** columns contained in the view with its primary image, improving visual clarity and user experience.
 
-Example with main table views : 
+## Example with main table views : 
+
+- View with PrimaryName column only
 
 ![image](https://github.com/drivardxrm/RecordImage.CellRenderer/assets/38399134/0a9e23cc-0ce5-4a56-abe8-8e3f0d410ef7)
 
-Example with a subgrid on a form :
+- View with PrimaryName and other Lookup columns
+
+![image](https://github.com/drivardxrm/RecordImage.CellRenderer/assets/38399134/72366317-fb96-40ba-97dd-550e9676e8a1)
+
+
+## Example with a subgrid on a form :
 
 ![image](https://github.com/drivardxrm/RecordImage.CellRenderer/assets/38399134/43b82e52-79eb-47e5-86b5-9baf44e9b2da)
 
-# Configuration
+## Configuration
 
 Simply add 'driv_DR.RecordImageCellRenderer' in the Customizer Control parameter of the PowerApps Grid Control
 
