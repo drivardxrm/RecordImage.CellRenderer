@@ -2,7 +2,9 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/drivardxrm/RecordImage.CellRenderer/total)
 
 This generic Cell Renderer is a specialized PCF Control that works in conjunction with the **PowerApps Grid Control**.
-It renders each record's **primary name** column and **other lookup** columns contained in the view with its primary image, improving visual clarity and user experience.
+
+It renders each record's **primary name** column and **other lookup** columns contained in the view along with their **primary images** when defined, 
+thus improving visual clarity and user experience.
 
 ## Example with main table views : 
 
