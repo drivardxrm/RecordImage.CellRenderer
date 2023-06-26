@@ -6,6 +6,8 @@ This generic Cell Renderer is a specialized PCF Control that works in conjunctio
 It renders each record's **primary name** column and **other lookup** columns contained in the view along with their **primary images** when defined, 
 thus improving visual clarity and user experience.
 
+[Download Here](https://github.com/drivardxrm/RecordImage.CellRenderer/releases/latest)
+
 ## Example with main table views : 
 
 - View with PrimaryName column only
