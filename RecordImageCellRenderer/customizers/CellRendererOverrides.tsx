@@ -36,11 +36,12 @@ export const generateCellRendererOverrides =
         const pcfContextService = new PcfContextService(pcfContextServiceProps);
         const recordid = rowData?.[RECID]
 
+        
         return (
             
             <QueryClientProvider client={queryClient}>
                 <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp entityname={pcfContextServiceProps.entityname} recordid={recordid!} name={props.formattedValue!} columnname={columnName} />
+                    <RecordImageApp entityname={pcfContextServiceProps.entityname} recordid={recordid!} name={props.formattedValue!} columnname={columnName} cellrendererprops={props}/> 
                 </PcfContextProvider>  
             </QueryClientProvider>
         )
@@ -61,11 +62,12 @@ export const generateCellRendererOverrides =
 
         const pcfContextService = new PcfContextService(pcfContextServiceProps);
 
+    
         return (
             
             <QueryClientProvider client={queryClient}>
                 <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp entityname={lookupentity} recordid={lookupid!} name={props.formattedValue!} columnname={columnName} />
+                    <RecordImageApp entityname={lookupentity} recordid={lookupid!} name={props.formattedValue!} columnname={columnName} cellrendererprops={props}/>
                 </PcfContextProvider>  
             </QueryClientProvider>
         )
