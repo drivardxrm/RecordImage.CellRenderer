@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useRecordImage } from "../hooks/useRecordImage"
 import { useStyles } from '../styles/Styles';
 import RecordImage from './RecordImage';
 import RecordLink from './RecordLink';
@@ -31,11 +30,10 @@ const RecordImageApp = ({entityname,recordid,name,cellrendererprops}:iRecordImag
     return(
 
       <div className={styles.stack} onClick={onCellClicked}>
-        {!!primaryimage &&   // Dont render the image part if not defined on the entity
+        {!!primaryimage &&   // image is only rendered if there is a primaryimage field defined on the table
           <div className={styles.stackitem}>
             <RecordImage entityname={entityname} recordid={recordid!} name={name} />
           </div>
-          
         }
         <div className={styles.stackitem}>
           <RecordLink entityname={entityname} recordid={recordid!} name={name} />

@@ -7,7 +7,9 @@ import { IPcfContextServiceProps } from "./services/PcfContextService";
 
 export class RecordImageCellRenderer implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     
-
+    
+    private _eventName:string | null
+    
     /**
      * Empty constructor.
      */
@@ -25,50 +27,33 @@ export class RecordImageCellRenderer implements ComponentFramework.ReactControl<
         notifyOutputChanged: () => void,
         state: ComponentFramework.Dictionary
     ): void {
-        const eventName = context.parameters.EventName.raw;
+        this._eventName = context.parameters.EventName.raw;
 
-        if (eventName) {
+        if (this._eventName) {
             
-            const contexttype = (context as any).accessibility._customControlProperties.contextToken.contextTokenType
-            // 5 = Subgrid
-            // 2 = Main entity view
+            const pcfContextServiceProps:IPcfContextServiceProps = {
+                context : context,
+                instanceid: this._eventName
+            } 
 
+            const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
+                generateCellRendererOverrides(pcfContextServiceProps)
+            };
 
-            // Depending on contexttype, get the entityname
-            const entityname = contexttype == 2 ? 
-                (context as any).accessibility._customControlProperties.contextToken.entityTypeName :
-                (context as any).accessibility._customControlProperties.descriptor.Parameters.TargetEntityType 
-                          
-            
-            // Metadata to get PrimaryName and PrimaryImage attribute name
-            context.utils.getEntityMetadata(entityname).then((metadata)=>{
-                const primarynamefield = metadata.PrimaryNameAttribute
-                const primaryimagefield = metadata.PrimaryImageAttribute         
-            
-                const pcfContextServiceProps:IPcfContextServiceProps = {
-                    context : context,
-                    entityname: entityname,
-                    instanceid: eventName,
-                    primarynamefield: primarynamefield,
-                    primaryimagefield: primaryimagefield
-                } 
+            (context as any).factory.fireEvent(this._eventName, paOneGridCustomizer);
     
-                const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
-                    generateCellRendererOverrides(pcfContextServiceProps)
-                };
-                (context as any).factory.fireEvent(eventName, paOneGridCustomizer);
-            
-            })    
         }
     }
-
+//context.factory._customControlProperties.pageType   = 
     /**
      * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
      * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
+       
         return React.createElement(React.Fragment);
+
     }
 
     /**

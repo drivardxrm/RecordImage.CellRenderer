@@ -4,7 +4,6 @@ import { IPcfContextServiceProps, PcfContextService } from '../services/PcfConte
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PcfContextProvider } from '../services/PcfContext';
 import RecordImageApp from '../component/RecordImageApp';
-import { useMetadata } from '../hooks/useMetadata';
 
 
 
@@ -27,9 +26,10 @@ export const generateCellRendererOverrides =
     ["Text"]: (props: CellRendererProps, rendererParams: GetRendererParams) => {             
         const {columnIndex, colDefs, rowData } = rendererParams;         
         const columnName = colDefs[columnIndex].name;
+        const isPrimary = colDefs[columnIndex].isPrimary;
         
         // Renders only for the PrimaryName of the entity
-        if(columnName !== pcfContextServiceProps.primarynamefield){
+        if(!isPrimary){
             return null;
         } 
 
@@ -41,7 +41,12 @@ export const generateCellRendererOverrides =
             
             <QueryClientProvider client={queryClient}>
                 <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp entityname={pcfContextServiceProps.entityname} recordid={recordid!} name={props.formattedValue!} columnname={columnName} cellrendererprops={props}/> 
+                    <RecordImageApp 
+                        entityname={pcfContextService.getTargetEntityName()} 
+                        recordid={recordid!} 
+                        name={props.formattedValue!} 
+                        columnname={columnName} 
+                        cellrendererprops={props}/> 
                 </PcfContextProvider>  
             </QueryClientProvider>
         )
@@ -67,7 +72,12 @@ export const generateCellRendererOverrides =
             
             <QueryClientProvider client={queryClient}>
                 <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp entityname={lookupentity} recordid={lookupid!} name={props.formattedValue!} columnname={columnName} cellrendererprops={props}/>
+                    <RecordImageApp 
+                        entityname={lookupentity} 
+                        recordid={lookupid!} 
+                        name={props.formattedValue!} 
+                        columnname={columnName} 
+                        cellrendererprops={props}/>
                 </PcfContextProvider>  
             </QueryClientProvider>
         )
