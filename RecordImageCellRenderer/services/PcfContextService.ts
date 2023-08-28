@@ -6,7 +6,6 @@ export interface IPcfContextServiceProps{
   instanceid: string
 }
 
-
 export class PcfContextService {
   instanceid:string
   context: ComponentFramework.Context<IInputs>
@@ -17,18 +16,6 @@ export class PcfContextService {
       this.instanceid = props.instanceid
       this.context = props.context
     }
-  }
-
-  // Get the main entityname from the context
-  getTargetEntityName ():string {
-
-    const pageType = (this.context as any).factory._customControlProperties.pageType
-            
-    // Depending on pagetype, get the entityname
-    return pageType == 'EntityList' ?  
-        (this.context as any).page.entityTypeName :
-        (this.context as any).factory._customControlProperties.descriptor.Parameters.TargetEntityType 
-
   }
 
   async getEntityMetadata (entityname:string) : Promise<ComponentFramework.PropertyHelper.EntityMetadata> {

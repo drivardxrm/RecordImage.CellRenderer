@@ -1,10 +1,10 @@
-import * as React from 'react';
+import * as React from 'react'
 import { Link } from "@fluentui/react-components"
 import { usePcfContext } from "../services/PcfContext"
-import { useStyles } from '../styles/Styles';
-import { iRecordImageProps } from './RecordImageApp';
+import { useStyles } from '../styles/Styles'
+import { iRecordImageCellProps } from './RecordImageCellApp'
 
-const RecordLink = ({entityname,recordid,name}:iRecordImageProps): JSX.Element => {
+const RecordLink = ({entityname,recordid,name}:iRecordImageCellProps): JSX.Element => {
 
     const pcfcontext = usePcfContext()
     const styles = useStyles();

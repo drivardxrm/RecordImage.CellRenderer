@@ -1,9 +1,8 @@
 import {IInputs, IOutputs} from "./generated/ManifestTypes";
 import { PAOneGridCustomizer } from "./types";
-
 import * as React from "react";
 import { generateCellRendererOverrides } from "./customizers/CellRendererOverrides";
-import { IPcfContextServiceProps } from "./services/PcfContextService";
+import { IPcfContextServiceProps, PcfContextService } from "./services/PcfContextService";
 
 export class RecordImageCellRenderer implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     
@@ -34,10 +33,12 @@ export class RecordImageCellRenderer implements ComponentFramework.ReactControl<
             const pcfContextServiceProps:IPcfContextServiceProps = {
                 context : context,
                 instanceid: this._eventName
-            } 
+            }
+            
+            const pcfContextService = new PcfContextService(pcfContextServiceProps);
 
             const paOneGridCustomizer: PAOneGridCustomizer = { cellRendererOverrides: 
-                generateCellRendererOverrides(pcfContextServiceProps)
+                generateCellRendererOverrides(pcfContextService)
             };
 
             (context as any).factory.fireEvent(this._eventName, paOneGridCustomizer);

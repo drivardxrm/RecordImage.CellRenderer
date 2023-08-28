@@ -1,5 +1,4 @@
 import { makeStyles } from '@fluentui/react-components';
-import { NONAME } from 'dns';
 
 export const useStyles = makeStyles({
   image: {  
@@ -56,13 +55,6 @@ export const useStyles = makeStyles({
     width: 'auto',
     height: 'auto',
     flexShrink: 1
-    // marginLeft: '5px',
-    // marginTop: '5px',
-    // '> :not(:last-child)': {
-    //   marginRight: '5px',
-    // }
   },
-
-
 });
 

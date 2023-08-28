@@ -1,31 +1,14 @@
 import * as React from 'react';
 import { CellRendererProps, GetRendererParams, RECID } from '../types';
-import { IPcfContextServiceProps, PcfContextService } from '../services/PcfContextService';
-import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { PcfContextProvider } from '../services/PcfContext';
-import RecordImageApp from '../component/RecordImageApp';
-
-
-
-const queryClient = new QueryClient({
-    queryCache: new QueryCache(), // creates a new querycahe for each instance of the control on a page
-    defaultOptions: {
-    queries: {
-        refetchOnMount: false,
-        refetchOnWindowFocus: false
-        // IMPORTANT otherwise data will be refreshed everytime the focus on the PCF is lost and regained
-        // https://react-query.tanstack.com/guides/window-focus-refetching#_top
-    }
-    }
-})
+import { PcfContextService } from '../services/PcfContextService';
+import RecordImageCellApp from '../component/RecordImageCellApp';
 
 //defining a closure, to be able to use webAPI and the cache
 export const generateCellRendererOverrides = 
-(pcfContextServiceProps: IPcfContextServiceProps) => {  
+(pcfContextService: PcfContextService) => {  
   return  {       
     ["Text"]: (props: CellRendererProps, rendererParams: GetRendererParams) => {             
         const {columnIndex, colDefs, rowData } = rendererParams;         
-        const columnName = colDefs[columnIndex].name;
         const isPrimary = colDefs[columnIndex].isPrimary;
         
         // Renders only for the PrimaryName of the entity
@@ -33,28 +16,32 @@ export const generateCellRendererOverrides =
             return null;
         } 
 
-        const pcfContextService = new PcfContextService(pcfContextServiceProps);
+        // Depending on pagetype, get the entityname
+        const pageType = (pcfContextService.context as any).factory._customControlProperties.pageType
+
+        const entityname = pageType == 'EntityList' ?  
+            (pcfContextService.context as any).page.entityTypeName :
+            (pcfContextService.context as any).factory._customControlProperties.descriptor.Parameters.TargetEntityType 
+
         const recordid = rowData?.[RECID]
 
         
         return (
+            <RecordImageCellApp 
+                entityname={entityname} 
+                recordid={recordid!} 
+                name={props.formattedValue!} 
+                startEditing={props.startEditing}
+                pcfContextService={pcfContextService}
+            />
             
-            <QueryClientProvider client={queryClient}>
-                <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp 
-                        entityname={pcfContextService.getTargetEntityName()} 
-                        recordid={recordid!} 
-                        name={props.formattedValue!} 
-                        columnname={columnName} 
-                        cellrendererprops={props}/> 
-                </PcfContextProvider>  
-            </QueryClientProvider>
         )
     },
     ["Lookup"]: (props: CellRendererProps, rendererParams: GetRendererParams) => {             
         const {columnIndex, colDefs, rowData } = rendererParams;         
         const columnName = colDefs[columnIndex].name;
         
+        // Extract the entityname and recordid from dynamic property (columnName)
         type ObjectKey = keyof typeof rowData;
         const columnNameProperty = columnName as ObjectKey;
         
@@ -62,24 +49,18 @@ export const generateCellRendererOverrides =
         if(lookup == null){
             return null
         }
-        const lookupentity = lookup.etn
-        const lookupid = lookup.id.guid
-
-        const pcfContextService = new PcfContextService(pcfContextServiceProps);
-
+        const entityname = lookup.etn
+        const recordid = lookup.id.guid
     
         return (
+            <RecordImageCellApp 
+                entityname={entityname} 
+                recordid={recordid} 
+                name={props.formattedValue!} 
+                startEditing={props.startEditing}
+                pcfContextService={pcfContextService}
+            />
             
-            <QueryClientProvider client={queryClient}>
-                <PcfContextProvider pcfcontext={pcfContextService}>
-                    <RecordImageApp 
-                        entityname={lookupentity} 
-                        recordid={lookupid!} 
-                        name={props.formattedValue!} 
-                        columnname={columnName} 
-                        cellrendererprops={props}/>
-                </PcfContextProvider>  
-            </QueryClientProvider>
         )
     }        
   }  

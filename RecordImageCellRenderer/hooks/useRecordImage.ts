@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { usePcfContext } from '../services/PcfContext'
 import { useMetadata } from './useMetadata'
 
-
 export const useRecordImage = (entityname:string,recordid:string) => {
   const pcfcontext = usePcfContext()
   

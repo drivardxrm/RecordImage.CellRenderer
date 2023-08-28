@@ -1,13 +1,10 @@
-import * as React from 'react';
+import * as React from 'react'
 import { Image } from "@fluentui/react-components"
 import { useRecordImage } from "../hooks/useRecordImage"
-import { useStyles } from '../styles/Styles';
-import { iRecordImageProps } from './RecordImageApp';
+import { useStyles } from '../styles/Styles'
+import { iRecordImageCellProps } from './RecordImageCellApp'
 
-
-
-
-const RecordImage = ({entityname,recordid,name}:iRecordImageProps):JSX.Element => {
+const RecordImage = ({entityname,recordid,name}:iRecordImageCellProps):JSX.Element => {
 
     const styles = useStyles();
     const {imagesrc, isError,isLoading} = useRecordImage(entityname,recordid)

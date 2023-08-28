@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { useQuery } from '@tanstack/react-query'
 import { usePcfContext } from '../services/PcfContext'
 
