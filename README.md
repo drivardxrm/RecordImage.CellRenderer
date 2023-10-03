@@ -29,6 +29,9 @@ Simply add 'driv_DR.RecordImageCellRenderer' in the Customizer Control parameter
 
 ![image](https://github.com/drivardxrm/RecordImage.CellRenderer/assets/38399134/3d45fb0c-7b1f-4a54-a2b0-35ac6df434a7)
 
+Blog Post:
+
+https://itmustbecode.com/powerapps-grid-control-how-to-make-cell-renderers-more-generic/
 
 Link to Grid Customization Documentation :
 
