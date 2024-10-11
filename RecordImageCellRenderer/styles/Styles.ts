@@ -3,8 +3,8 @@ import { makeStyles } from '@fluentui/react-components';
 export const useStyles = makeStyles({
   image: {  
     position : 'relative',
-    height: '24px',
-    minWidth : '24px',
+    height: '32px',
+    minWidth : '32px',
     display : 'flex',
     alignItems: 'center'
     

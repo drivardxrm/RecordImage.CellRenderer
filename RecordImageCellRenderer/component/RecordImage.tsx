@@ -19,8 +19,8 @@ const RecordImage = ({entityname,recordid,name}:iRecordImageCellProps):JSX.Eleme
           key={'recordimage-' + recordid}
           shape={"rounded"}
           src={imagesrc}
-          height={24}
-          width={24}
+          height={32}
+          width={32}
         />
       )
     }

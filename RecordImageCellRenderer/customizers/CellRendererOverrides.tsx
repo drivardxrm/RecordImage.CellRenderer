@@ -20,8 +20,13 @@ export const generateCellRendererOverrides =
         const pageType = (pcfContextService.context as any).factory._customControlProperties.pageType
 
         const entityname = pageType == 'EntityList' ?  
-            (pcfContextService.context as any).page.entityTypeName :
-            (pcfContextService.context as any).factory._customControlProperties.descriptor.Parameters.TargetEntityType 
+            (pcfContextService.context as any).page?.entityTypeName :
+            (pcfContextService.context as any).factory?._customControlProperties?.descriptor?.Parameters?.TargetEntityType 
+
+        // If entityname is not defined, Fail gracefully
+        if(entityname == null){
+            return null
+        }
 
         const recordid = rowData?.[RECID]
 
